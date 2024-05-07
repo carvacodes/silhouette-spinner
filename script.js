@@ -14,7 +14,7 @@ let descriptionTicker = document.getElementById('descriptionTicker');
 
 let centerX = innerWidth / 2,
     centerY = innerHeight / 2,
-    x, y, r = 0, m = 1;
+    x, y, r = 0;
 
 /////////////////////
 //      canvas     //
