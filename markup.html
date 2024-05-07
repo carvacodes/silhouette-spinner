@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="./style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <canvas id="canvas"></canvas>
+        <div class="controls">
+            <div class="color">
+                <p>Color</p>
+                <button id="defaultColor">Default</button>
+                <button id="randomColor">Random</button>
+                <button id="shiftingColor">Shifting</button>
+            </div>
+            <div>
+                <p>Composite Operation</p>
+                <select name="compositeOperationSelect" id="compositeOperationSelect">
+                    <option data-description="" value="selectComposite">Select Composite Operation</option>
+                    <option data-description="This is the default setting and draws new shapes on top of the existing canvas content." value="source-over">Source-over</option>
+                    <option data-description="The new shape is drawn only where both the new shape and the destination canvas overlap. Everything else is made transparent." value="source-in">Source-in</option>
+                    <option data-description="The new shape is drawn where it doesn't overlap the existing canvas content." value="source-out">Source-out</option>
+                    <option data-description="The new shape is only drawn where it overlaps the existing canvas content." value="source-atop">Source-atop</option>
+                    <option data-description="New shapes are drawn behind the existing canvas content." value="destination-over">Destination-over</option>
+                    <option data-description="The existing canvas content is kept where both the new shape and existing canvas content overlap. Everything else is made transparent." value="destination-in">Destination-in</option>
+                    <option data-description="The existing content is kept where it doesn't overlap the new shape." selected value="destination-out">Destination-out</option>
+                    <option data-description="The existing canvas is only kept where it overlaps the new shape. The new shape is drawn behind the canvas content." value="destination-atop">Destination-atop</option>
+                    <option data-description="Where both shapes overlap, the color is determined by adding color values." value="lighter">Lighter</option>
+                    <option data-description="Only the new shape is shown." value="copy">Copy</option>
+                    <option data-description="Shapes are made transparent where both overlap and drawn normal everywhere else." value="xor">XOR</option>
+                    <option data-description="The pixels of the top layer are multiplied with the corresponding pixels of the bottom layer. A darker picture is the result." value="multiply">Multiply</option>
+                    <option data-description="The pixels are inverted, multiplied, and inverted again. A lighter picture is the result (opposite of multiply)" value="screen">Screen</option>
+                    <option data-description="A combination of multiply and screen. Dark parts on the base layer become darker, and light parts become lighter." value="overlay">Overlay</option>
+                    <option data-description="Retains the darkest pixels of both layers." value="darken">Darken</option>
+                    <option data-description="Retains the lightest pixels of both layers." value="lighten">Lighten</option>
+                    <option data-description="Divides the bottom layer by the inverted top layer." value="color-dodge">Color-dodge</option>
+                    <option data-description="Divides the inverted bottom layer by the top layer, and then inverts the result." value="color-burn">Color-burn</option>
+                    <option data-description="Like overlay, a combination of multiply and screen — but instead with the top layer and bottom layer swapped." value="hard-light">Hard-light</option>
+                    <option data-description="A softer version of hard-light. Pure black or white does not result in pure black or white." value="soft-light">Soft-light</option>
+                    <option data-description="Subtracts the bottom layer from the top layer — or the other way round — to always get a positive value." value="difference">Difference</option>
+                    <option data-description="Like difference, but with lower contrast." value="exclusion">Exclusion</option>
+                    <option data-description="Preserves the luma and chroma of the bottom layer, while adopting the hue of the top layer." value="hue">Hue</option>
+                    <option data-description="Preserves the luma and hue of the bottom layer, while adopting the chroma of the top layer." value="saturation">Saturation</option>
+                    <option data-description="Preserves the luma of the bottom layer, while adopting the hue and chroma of the top layer." value="color">Color</option>
+                    <option data-description="Preserves the hue and chroma of the bottom layer, while adopting the luma of the top layer." value="luminosity">Luminosity</option>
+                </select>
+                <p class="ticker"><span id="descriptionTicker">The existing content is kept where it doesn't overlap the new shape.</span></p>
+            </div>
+        </div>
+        <script src="./script.js"></script>
+    </body>
+</html>

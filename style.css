@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background: black;
+  width: 100vw;
+  height: 100vh;
+}
+
+* {
+  font-family: 'Marcellus', sans-serif;
+  color: rgb(209, 209, 209);
+}
+
+.controls {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex: 1;
+}
+
+.controls > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: center;
+  padding: 10px;
+  margin: 3px;
+  border: thin solid rgb(209, 209, 209);
+  border-radius: 8px;
+}
+
+.ticker {
+  max-width: 10rem;
+  overflow: hidden;
+  position: relative;
+  padding: 0;
+}
+
+#descriptionTicker {
+  position: relative;
+  left: 200%;
+  white-space: nowrap;
+  animation-name: scrollLeftAfterPause;
+  animation-timing-function: linear;
+  animation-fill-mode: none;
+  animation-delay: 1s;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+}
+
+button, select, option {
+  background-color: transparent;
+  border-style: none;
+  border: thin solid rgb(209, 209, 209);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  min-width: 80px;
+}
+button:hover {
+  cursor: pointer;
+  background-color: #335;
+  color: white;
+}
+button.active {
+  background-color: blueviolet;
+  color: white;
+}
+
+option {
+  color: black;
+}
+
+@keyframes scrollLeftAfterPause {
+  0% {
+    left: 100%;
+  } 
+  100% {
+    left: -700%;
+  }
+}
