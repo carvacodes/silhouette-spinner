@@ -13,7 +13,7 @@ let compSelect = document.getElementById('compositeOperationSelect');
 let descriptionTicker = document.getElementById('descriptionTicker');
 
 let centerX = innerWidth / 2,
-    centerY = innerHeight / 2,
+    centerY = 2 * innerHeight / 3,
     x, y, r = 0;
 
 /////////////////////
@@ -35,7 +35,7 @@ window.addEventListener('resize', function(){
   canvas.width = innerWidth;
   canvas.height = innerHeight;
   centerX = innerWidth / 2;
-  centerY = innerHeight / 2;
+  centerY = 2 * innerHeight / 3;
 })
 
 // handle clicks on the window and pick actions based on the element that was clicked

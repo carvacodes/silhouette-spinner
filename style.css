@@ -11,10 +11,6 @@ body {
   color: rgb(209, 209, 209);
 }
 
-canvas {
-  margin-top: 6rem;
-}
-
 .controls {
   position: fixed;
   top: 0;
@@ -85,11 +81,5 @@ option {
   } 
   100% {
     left: -700%;
-  }
-}
-
-@media screen and (min-width: 600px) and (min-height: 600px;) {
-  canvas {
-    margin-top: 0;
   }
 }
