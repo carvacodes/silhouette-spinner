@@ -69,6 +69,7 @@ compSelect.addEventListener('change', ()=>{
     ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
     ctx.fillRect(0, 0, innerWidth, innerHeight);
     compositeOperation = compSelect.value;
+
     // pull the description out of the selected option's custom "data-description" attribute
     descriptionTicker.innerText = compSelect.options[compSelect.selectedIndex].getAttribute('data-description');
     descriptionTicker.getAnimations()[0].currentTime = 0;
@@ -79,38 +80,37 @@ compSelect.addEventListener('change', ()=>{
 //     animation     //
 ///////////////////////
 
-let currentTime = Date.now();
+// variables to track the time elapsed between each frame
+let firstFrameTime = performance.now();
+let frameSpeedFactor = 1;
+let tempFrameSpeedFactor = 0;
 
-function animate() {
-  // cap at 60fps
-  let frameTime = Date.now()
-  if (frameTime - currentTime < 16.666667) {
-    window.requestAnimationFrame(animate);
-    return;
-  }
-  
-  currentTime = frameTime;
+function animate(callbackTime) {
+  // target 30fps by dividing the monitor's refresh rate by 30 to calculate per-frame movement
+  tempFrameSpeedFactor = Math.min(callbackTime - firstFrameTime, 30);   // set a minimum to avoid frame timer buildup when the window is not focused
+  firstFrameTime = callbackTime;
+  frameSpeedFactor = tempFrameSpeedFactor / 30;
 
   // if shifting, update the hue
   if (shifting) {
-    hue = hue <= 360 ? hue + 1 : 1;
+    hue = hue <= 360 ? hue + frameSpeedFactor : frameSpeedFactor;
   }
 
   // set the composite operation and draw the default "blank" (not really blank) canvas background rect
   ctx.globalCompositeOperation = compositeOperation;
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+  ctx.shadowBlur = 0;
+  ctx.fillStyle = `rgba(0, 0, 0, ${0.1 * frameSpeedFactor})`;
   ctx.fillRect(0, 0, innerWidth, innerHeight);
   
   // get the ellipse's radius and current position in its orbit
-  r = r < 360 ? r + 4.5 : 4.5;
+  r = r < 360 ? r + (4.5 * frameSpeedFactor) : 4.5 * frameSpeedFactor;
   x = centerX + Math.cos((Math.PI * 2) * (r / 360) - Math.PI / 3) * pathWidth;
   y = centerY - Math.sin((Math.PI * 2) * (r / 360)) * pathWidth;
 
   // general canvas drawing ops
-  ctx.globalCompositeOperation = 'multiply';
   ctx.shadowColor = `hsl(${hue}, 100%, ${lightness}%)`;
   ctx.shadowBlur = 30;
-  ctx.fillStyle = `hsl(${hue - 180}, 100%, ${lightness}%)`;
+  ctx.fillStyle = `hsl(${hue - 180 < 0 ? hue + 180 : hue - 180}, 100%, ${lightness}%)`;
   ctx.beginPath();
   ctx.arc(x, y, circleSize, 0, Math.PI * 2);
   ctx.fill()
